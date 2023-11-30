@@ -25,23 +25,3 @@ export function geometryNoise(radius = 1, speed, geometry) {
     geometry.computeVertexNormals();
     pos.needsUpdate = true;
 }
-
-export class CustomSinCurve extends THREE.Curve {
-
-	constructor(scale = 1) {
-		super();
-		this.scale = scale;
-	}
-
-	getPoint(t, optionalTarget = new THREE.Vector3()) {
-		const tx = t;
-		const ty = -t * t;
-		const tz = 0;
-
-		return optionalTarget.set(tx, ty, tz).multiplyScalar(this.scale);
-	}
-}
-
-export function curvePath(x, y, z, target = new THREE.Vector3(), scale) {
-    return target.set(x, y, z).multiplyScalar(scale);
-}
