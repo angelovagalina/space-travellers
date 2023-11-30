@@ -78,9 +78,11 @@ hat.position.y = 3.1;
 eyeLeft.position.set(-0.95, -0.1, 0.3);
 eyeRight.position.set(-0.95, -0.1, -0.3);
 
-spirit.position.y = 4.6;
-spirit.position.x = 1;
-spirit.rotateY(0.4);
-spirit.rotateX(-0.1);
+spirit.position.set(0.8, 4.6, -1);
+spirit.rotateY(0.8);
+spirit.rotateZ(-0.1);
+
+body.receiveShadow = true;
+hat.castShadow = true;
 
 export { spirit };

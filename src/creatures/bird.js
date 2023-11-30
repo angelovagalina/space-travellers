@@ -172,6 +172,10 @@ legBR.position.y = -8;
 legBR.position.z = -0.5;
 
 bird.position.y = 6;
-bird.rotateY(0.4);
+bird.rotateY(0.6);
+bird.rotateZ(-0.1);
+
+body.receiveShadow = true;
+neck.receiveShadow = true;
 
 export { bird };
