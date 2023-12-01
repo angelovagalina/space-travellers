@@ -1,28 +1,55 @@
 import * as THREE from "three";
 
+// Colors
+const BODY_COLOR = new THREE.Color(0xfff6c7);
+const EYE_COLOR = new THREE.Color(0xfafeff);
+const PUPIL_COLOR = new THREE.Color(0x40c2f5);
+
+// Materials
+const BODY_MATERIAL = new THREE.MeshPhysicalMaterial({
+    color: BODY_COLOR,
+    transmission: 0.5,
+    opacity: 1.0,
+    metalness: 0.0,
+    roughness: 0.0,
+    ior: 1.5,
+    thickness: 0.01,
+    specularIntensity: 1,
+    specularColor: new THREE.Color(0xf5c8b5),
+});
+
+const EYE_MATERIAL = new THREE.MeshBasicMaterial({
+    color: EYE_COLOR,
+});
+
+const PUPIL_MATERIAL = new THREE.MeshBasicMaterial({
+    color: PUPIL_COLOR,
+});
+
+// Geometries
+const EYE_GEOMETRY = new THREE.SphereGeometry(0.8, 32, 16);
+const PUPIL_GEOMETRY = new THREE.SphereGeometry(0.5, 32, 16);
+
 export class SpaceEgg {
     geometry;
-    material;
 
     constructor(geometry) {
         this.geometry = geometry;
-        this.material = new THREE.MeshBasicMaterial({ color: 0xfff6c7 });
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
     }
 
-    static createSpaceEgg(mesh) {
+    static createSpaceEgg(geometry) {
         const eye = this.createSpaceEggEye();
         const pupil = this.createSpaceEggEyePupil();
-        mesh.add(eye);
-        mesh.add(pupil);
+        const spaceEgg = new THREE.Mesh(geometry, BODY_MATERIAL);
 
-        return mesh;
+        spaceEgg.add(eye);
+        spaceEgg.add(pupil);
+
+        return spaceEgg;
     }
 
     static createSpaceEggEye() {
-        const spaceEggEyeGeometry = new THREE.SphereGeometry(0.8, 32, 16);
-        const spaceEggEyeMaterial = new THREE.MeshBasicMaterial({ color: 0xfefff7 });
-        const spaceEggEye = new THREE.Mesh(spaceEggEyeGeometry, spaceEggEyeMaterial);
+        const spaceEggEye = new THREE.Mesh(EYE_GEOMETRY, EYE_MATERIAL);
 
         spaceEggEye.position.x = -0.8;
         
@@ -30,14 +57,10 @@ export class SpaceEgg {
     }
 
     static createSpaceEggEyePupil() {
-        const spaceEggPupilGeometry = new THREE.SphereGeometry(0.5, 32, 16);
-        const spaceEggPupilMaterial = new THREE.MeshBasicMaterial({ color: 0x58bbd1 });
-        const spaceEggEyePupil = new THREE.Mesh(spaceEggPupilGeometry, spaceEggPupilMaterial);
+        const spaceEggEyePupil = new THREE.Mesh(PUPIL_GEOMETRY, PUPIL_MATERIAL);
 
         spaceEggEyePupil.position.x = -1.2;
 
         return spaceEggEyePupil;
-
     }
-
 }
